@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    //Refresh igual do Gmail
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     // Retrofit (HTTP Client): https://square.github.io/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

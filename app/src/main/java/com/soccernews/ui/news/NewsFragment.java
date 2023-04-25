@@ -43,4 +43,9 @@ public class NewsFragment extends Fragment {
         binding = null;
     }
 
+    private void setupMatchsRefresh() {
+        //TODO: Fazer a atualização das partidas no arrastar do Swipe
+        //binding.swiperefreshlayout.setOnRefreshListener(this::findMatchesFromApi);
+    }
+
 }
