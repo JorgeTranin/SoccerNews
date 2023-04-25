@@ -3,12 +3,14 @@ package com.soccernews.ui.news.adapternews;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soccernews.databinding.ItemNewsBinding;
 import com.soccernews.domain.News;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,6 +35,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         News news = this.news.get(position);
         Context context = holder.itemView.getContext();
+
+        //Set Imagem Times
+        ImageView imageNew = (ImageView) holder.binding.ivNew;
+
+        Picasso.get().load(news.getImage()).into(imageNew);
 
         holder.binding.tvTitleNew.setText(news.getTitle());
         holder.binding.tvDescripition.setText(news.getDescription());

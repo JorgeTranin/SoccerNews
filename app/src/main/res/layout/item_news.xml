@@ -28,7 +28,7 @@
                 android:id="@+id/iv_new"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:background="@drawable/ic_launcher_background"
+                android:background="@color/Cinza"
                 android:contentDescription="@string/description_new"
                 android:scaleType="centerCrop" />
 
