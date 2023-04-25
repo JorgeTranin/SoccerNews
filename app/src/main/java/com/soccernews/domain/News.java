@@ -1,14 +1,41 @@
 package com.soccernews.domain;
 
 public class News {
+    private int id;
     private String title;
     private String description;
-    private String textNew;
+    private String textNews;
+    private String image;
+    private String linkNews;
 
-    public News(String title, String description, String textNew) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getLinkNews() {
+        return linkNews;
+    }
+
+    public void setLinkNews(String linkNews) {
+        this.linkNews = linkNews;
+    }
+
+    public News(String title, String description, String textNews) {
         this.title = title;
         this.description = description;
-        this.textNew = textNew;
+        this.textNews = textNews;
     }
 
     public String getTitle() {
@@ -27,11 +54,11 @@ public class News {
         this.description = description;
     }
 
-    public String getTextNew() {
-        return textNew;
+    public String getTextNews() {
+        return textNews;
     }
 
-    public void setTextNew(String textNew) {
-        this.textNew = textNew;
+    public void setTextNews(String textNews) {
+        this.textNews = textNews;
     }
 }

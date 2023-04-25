@@ -36,7 +36,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         holder.binding.tvTitleNew.setText(news.getTitle());
         holder.binding.tvDescripition.setText(news.getDescription());
-        holder.binding.tvTextNew.setText(news.getTextNew());
+        holder.binding.tvTextNew.setText(news.getTextNews());
 
     }
 
