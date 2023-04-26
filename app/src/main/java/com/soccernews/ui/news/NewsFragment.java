@@ -17,6 +17,7 @@ public class NewsFragment extends Fragment {
 
     private FragmentNewsBinding binding;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         NewsViewModel newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
@@ -27,8 +28,10 @@ public class NewsFragment extends Fragment {
         //set de um layout para minha recycler view
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
             //passa para meu adapter a lista a ser consumida
+            binding.rvNews.setHasFixedSize(true);
             binding.rvNews.setAdapter(new NewsAdapter(news));
         });
         return root;
@@ -39,4 +42,10 @@ public class NewsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void setupMatchsRefresh() {
+        //TODO: Fazer a atualização das partidas no arrastar do Swipe
+        //binding.swiperefreshlayout.setOnRefreshListener(this::findMatchesFromApi);
+    }
+
 }
