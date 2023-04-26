@@ -33,7 +33,19 @@ public class NewsFragment extends Fragment {
 
         loadNews(newsViewModel);
 
+        newsViewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            switch (state) {
+                case DOING:
+                    //TODO implementar o swipeRefresh modo carregando
+                    break;
+                case DONE:
+                    //TODO parar o swipeRefresh modo carregando
+                    break;
+                case ERRO:
+                    //TODO Buscar dados localmente
+            }
 
+        });
         return root;
     }
 
@@ -53,6 +65,7 @@ public class NewsFragment extends Fragment {
 
             }));
         });
+
     }
 
     @Override
