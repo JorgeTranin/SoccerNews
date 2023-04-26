@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.soccernews.databinding.ItemNewsBinding;
 import com.soccernews.domain.News;
-import com.squareup.picasso.BuildConfig;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -60,27 +59,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.binding.ivCompartilhar.setOnClickListener(view -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,
-                    news.getLinkNews() + BuildConfig.APPLICATION_ID);
             sendIntent.setType("text/plain");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, news.getLinkNews());
+            holder.itemView.getContext().startActivity(Intent.createChooser(sendIntent, "Share"));
 
-            // Adiciona opções de compartilhamento
-            Intent whatsappIntent = new Intent();
-            whatsappIntent.setAction(Intent.ACTION_SEND);
-            whatsappIntent.putExtra(Intent.EXTRA_TEXT,
-                    news.getLinkNews() + BuildConfig.APPLICATION_ID);
-            whatsappIntent.setType("text/plain");
-            whatsappIntent.setPackage("com.whatsapp");
+        });
+        // Itent de click no icone favoritos, e persistencia de dados locais
 
-            Intent otherIntent = new Intent();
-            otherIntent.setAction(Intent.ACTION_CHOOSER);
-            otherIntent.putExtra(Intent.EXTRA_INTENT, sendIntent);
-            otherIntent.putExtra(Intent.EXTRA_TITLE, "Compartilhar via...");
+        holder.binding.ivFavorite.setOnClickListener(view -> {
 
-            Intent[] intents = {whatsappIntent};
-            otherIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
-
-            holder.itemView.getContext().startActivity(otherIntent);
         });
 
     }
