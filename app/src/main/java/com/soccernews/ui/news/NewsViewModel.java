@@ -3,7 +3,7 @@ package com.soccernews.ui.news;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.soccernews.data.NewsApi;
+import com.soccernews.data.remote.NewsApi;
 import com.soccernews.domain.News;
 
 import java.util.List;
@@ -16,7 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsViewModel extends ViewModel {
 
+    public enum State {
+        DOING, DONE, ERRO
+    }
+
     private final MutableLiveData<List<News>> mNews = new MutableLiveData<>();
+    private final MutableLiveData<State> state = new MutableLiveData<>();
+
     private final NewsApi newsApi;
 
 
@@ -27,21 +33,25 @@ public class NewsViewModel extends ViewModel {
         newsApi = retrofit.create(NewsApi.class);
         this.findNews();
 
+
     }
 
     public void findNews() {
+        state.setValue(State.DOING);
         newsApi.getNews().enqueue(new Callback<List<News>>() {
             @Override
             public void onResponse(Call<List<News>> call, Response<List<News>> response) {
                 if (response.isSuccessful()) {
                     mNews.setValue(response.body());
+                    state.setValue(State.DONE);
                 }
-                //TODO pensar em uma estrategia de tratamentos de erros
+                state.setValue(State.ERRO);
             }
 
             @Override
             public void onFailure(Call<List<News>> call, Throwable t) {
-                //TODO pensar em uma estrategia de tratamentos de erros
+                state.setValue(State.ERRO);
+
             }
         });
     }
@@ -49,6 +59,11 @@ public class NewsViewModel extends ViewModel {
     public MutableLiveData<List<News>> getNews() {
 
         return mNews;
+    }
+
+    public MutableLiveData<State> getState() {
+
+        return this.state;
     }
 
 }

@@ -4,17 +4,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.soccernews.MainActivity;
+import com.soccernews.data.local.AppDatabase;
 import com.soccernews.databinding.FragmentFavoritesBinding;
+import com.soccernews.domain.News;
+import com.soccernews.ui.news.adapternews.NewsAdapter;
+
+import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
     private FragmentFavoritesBinding binding;
+    private AppDatabase db;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FavoritesViewModel favoritesViewModel = new ViewModelProvider(this).get(FavoritesViewModel.class);
@@ -22,9 +29,24 @@ public class FavoritesFragment extends Fragment {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textFavorites;
-        favoritesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        loadFavoritesNews();
+
+
         return root;
+
+    }
+
+    private void loadFavoritesNews() {
+        MainActivity activity = (MainActivity) getActivity();
+        List<News> favoriteNews = activity.getDb().newsDao().loadFavoriteNews();
+        binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        //passa para meu adapter a lista a ser consumida
+        binding.rvNews.setHasFixedSize(true);
+        binding.rvNews.setAdapter(new NewsAdapter(favoriteNews, updateNews -> {
+            activity.getDb().newsDao().save(updateNews);
+            loadFavoritesNews();
+
+        }));
     }
 
     @Override

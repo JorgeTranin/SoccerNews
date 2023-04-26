@@ -1,12 +1,19 @@
 package com.soccernews.domain;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class News {
+    @PrimaryKey
     private int id;
     private String title;
     private String description;
     private String textNews;
     private String image;
     private String linkNews;
+    public boolean favorite;
+
 
     public int getId() {
         return id;

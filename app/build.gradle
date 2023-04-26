@@ -33,6 +33,10 @@ android {
 }
 
 dependencies {
+    //Room, persistencia local
+    implementation("androidx.room:room-runtime:2.5.1")
+    annotationProcessor("androidx.room:room-compiler:2.5.1")
+
     //Refresh igual do Gmail
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 

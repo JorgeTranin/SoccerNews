@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.soccernews.R;
 import com.soccernews.databinding.ItemNewsBinding;
 import com.soccernews.domain.News;
 import com.squareup.picasso.Picasso;
@@ -19,9 +20,11 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     //Lista de noticias
     private List<News> news;
+    private NewsListener favoriteListener;
 
-    public NewsAdapter(List<News> news) {
+    public NewsAdapter(List<News> news, NewsListener favoriteListener) {
         this.news = news;
+        this.favoriteListener = favoriteListener;
     }
 
     @NonNull
@@ -64,11 +67,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.itemView.getContext().startActivity(Intent.createChooser(sendIntent, "Share"));
 
         });
-        // Itent de click no icone favoritos, e persistencia de dados locais
+        // Itent de click no icone favoritos e sera iniciado pelo Fragments
 
         holder.binding.ivFavorite.setOnClickListener(view -> {
-
+            news.favorite = !news.favorite;
+            this.favoriteListener.onClick(news);
+            //notificando que o elemento foi atualizado e o recyclerView atualize a lista
+            notifyItemChanged(position);
         });
+        if (news.favorite) {
+            holder.binding.ivFavorite.setColorFilter(context.getResources().getColor(R.color.Red));
+        }
 
     }
 
@@ -84,5 +93,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    public interface NewsListener {
+        void onClick(News news);
     }
 }
