@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.soccernews.MainActivity;
 import com.soccernews.databinding.FragmentNewsBinding;
 import com.soccernews.ui.news.adapternews.NewsAdapter;
 
@@ -52,16 +51,14 @@ public class NewsFragment extends Fragment {
 
     private void loadNews(NewsViewModel newsViewModel) {
         //set de um layout para minha recycler view
+        //binding.swipeRefreshLayout.setRefreshing(true);
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
             //passa para meu adapter a lista a ser consumida
             binding.rvNews.setHasFixedSize(true);
             binding.rvNews.setAdapter(new NewsAdapter(news, updateNews -> {
                 //evento de click no favoritos para salvar
-                MainActivity activity = (MainActivity) getActivity();
-                if (activity != null) {
-                    activity.getDb().newsDao().save(updateNews);
-                }
+                newsViewModel.saveNews(updateNews);
 
             }));
         });
@@ -74,9 +71,10 @@ public class NewsFragment extends Fragment {
         binding = null;
     }
 
+
     private void setupMatchsRefresh() {
         //TODO: Fazer a atualização das partidas no arrastar do Swipe
-        //binding.swiperefreshlayout.setOnRefreshListener(this::findMatchesFromApi);
+        binding.swipeRefreshLayout.setOnRefreshListener(this::setupMatchsRefresh);
     }
 
 }

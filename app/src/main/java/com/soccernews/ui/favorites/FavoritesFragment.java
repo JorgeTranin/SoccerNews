@@ -10,44 +10,39 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.soccernews.MainActivity;
-import com.soccernews.data.local.AppDatabase;
 import com.soccernews.databinding.FragmentFavoritesBinding;
-import com.soccernews.domain.News;
 import com.soccernews.ui.news.adapternews.NewsAdapter;
-
-import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
     private FragmentFavoritesBinding binding;
-    private AppDatabase db;
+    private FavoritesViewModel favoritesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FavoritesViewModel favoritesViewModel = new ViewModelProvider(this).get(FavoritesViewModel.class);
+        favoritesViewModel = new ViewModelProvider(this).get(FavoritesViewModel.class);
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         loadFavoritesNews();
 
-
         return root;
 
     }
 
     private void loadFavoritesNews() {
-        MainActivity activity = (MainActivity) getActivity();
-        List<News> favoriteNews = activity.getDb().newsDao().loadFavoriteNews();
-        binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-        //passa para meu adapter a lista a ser consumida
-        binding.rvNews.setHasFixedSize(true);
-        binding.rvNews.setAdapter(new NewsAdapter(favoriteNews, updateNews -> {
-            activity.getDb().newsDao().save(updateNews);
-            loadFavoritesNews();
+        favoritesViewModel.loadFavoriteNews().observe(getViewLifecycleOwner(), localNews -> {
+            binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
+            //passa para meu adapter a lista a ser consumida
+            binding.rvNews.setHasFixedSize(true);
+            binding.rvNews.setAdapter(new NewsAdapter(localNews, updateNews -> {
+                favoritesViewModel.saveNews(updateNews);
+                loadFavoritesNews();
 
-        }));
+            }));
+        });
     }
+
 
     @Override
     public void onDestroyView() {
