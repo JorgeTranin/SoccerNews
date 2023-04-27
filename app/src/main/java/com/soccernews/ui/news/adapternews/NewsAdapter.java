@@ -75,6 +75,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             //notificando que o elemento foi atualizado e o recyclerView atualize a lista
             notifyItemChanged(position);
         });
+        //Muda a cor do Icone de favorito no click
         if (news.favorite) {
             holder.binding.ivFavorite.setColorFilter(context.getResources().getColor(R.color.Red));
         }

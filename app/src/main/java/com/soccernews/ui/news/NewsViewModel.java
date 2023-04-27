@@ -38,8 +38,9 @@ public class NewsViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     mNews.setValue(response.body());
                     state.setValue(State.DONE);
+                }else {
+                    state.setValue(State.ERRO);
                 }
-                state.setValue(State.ERRO);
             }
 
             @Override
