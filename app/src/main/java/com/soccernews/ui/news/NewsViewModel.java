@@ -47,6 +47,7 @@ public class NewsViewModel extends ViewModel {
             public void onFailure(Call<List<News>> call, Throwable t) {
                 state.setValue(State.ERRO);
 
+
             }
         });
     }

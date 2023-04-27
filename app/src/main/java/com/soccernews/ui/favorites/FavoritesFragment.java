@@ -39,6 +39,7 @@ public class FavoritesFragment extends Fragment {
                 favoritesViewModel.saveNews(updateNews);
                 loadFavoritesNews();
 
+
             }));
         });
     }

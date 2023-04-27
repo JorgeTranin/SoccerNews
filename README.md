@@ -1,6 +1,6 @@
 # Documentação do App SoccerNews
 
-App Nativo Android de Notícias Sobre Futebol Feminino (Mês da Mulher).
+App Nativo Android de Notícias Sobre Futebol Feminino.
 
 ## Visão geral
 
@@ -9,7 +9,7 @@ aplicativo [noticia do mundo do futebol feminino consumindo uma API Rest criada 
 
 ## Screenshots
 
-<img src="" width=25%>   <img src="" width=25%>  <img src="" width=25%>
+<img src="/image/Screenshot_fragment1.png" width=25%>   <img src="/image/Screenshot_fragment1_Favoritado.png" width=25%>  <img src="/image/Screenshot_fragment1_opcao_compartilhar.png" width=25%> <img src="/image/Screenshot_fragment2.png" width=25%>
 
 ### Tecnologias utilizadas
 
@@ -20,10 +20,8 @@ O aplicativo foi desenvolvido utilizando as seguintes tecnologias:
 - Persistencia local com ROOM
 - Firebase
 - API Rest
-- Retrofit
-- Picasso
+- [Picasso](https://square.github.io/picasso/)
 - JetPack compose
-- Parcelable Google
 - Versionamento com Git
 - Material Designer UI e UX
 - [Retrofit](https://square.github.io/retrofit/)
@@ -33,11 +31,13 @@ O aplicativo foi desenvolvido utilizando as seguintes tecnologias:
 ## Este repositório foi organizado em algumas branches que representam as implementações realizadas:
 
 1. [Android Jetpack e Material Design: Criando Apps Nativos Poderosos]()
-    - [release/android-jetpack-material-design-criando-apps-nativos-poderosos]()
-1. [Abstraindo o Domínio de Apps Android Nativos com Java]()
-    - [release/abstraindo-dominio-de-apps-android-nativos-com-java]()
-1. [Consumo de APIs e Persistência de Dados Locais em Apps Android]()
-    - [release/consumo-de-apis-e-persistencia-de-dados-locais]()
+   - [release/android-jetpack-material-design-criando-apps-nativos-poderosos](https://github.com/JorgeTranin/SoccerNews/tree/release/android-jetpack-material-design-criando-apps-nativos-poderosos)
+2. [Abstraindo o Domínio de Apps Android Nativos com Java]()
+   - [release/abstraindo-dominio-de-apps-android-nativos-com-java](https://github.com/JorgeTranin/SoccerNews/tree/release/abstraindo-dominio-de-apps-android-nativos-com-java)
+3. [Consumo de APIs e Persistência de Dados Locais em Apps Android]()
+   - [release/consumo-de-apis-e-persistencia-de-dados-locais](https://github.com/JorgeTranin/SoccerNews/tree/release/consumo-de-apis-e-persistencia-de-dados-locais)
+4. [evolucao-final-do-app]()
+   - [release/evolucao-final-do-app](https://github.com/JorgeTranin/SoccerNews/tree/release/evolucao-final-do-app)
 
 ## Instalação
 
